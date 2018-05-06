@@ -2,6 +2,10 @@
 
 ![Download](https://api.bintray.com/packages/mq2553299/maven/rximagepicker/images/download.svg)
 
+### 关于RxImagePicker的设计起源，请参考我的这篇文章：
+
+[RxImagePicker:从零实现灵活且可高度定制的Android图片选择架构](https://www.jianshu.com/p/fecf3a13e615)
+
 ## 简介
 
 RxImagePicker存在的目的是：让开发者能够**简单**并且**灵活**的方式实现Android开发中**图片选择**的需求。
@@ -32,15 +36,19 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 
 ### Sample截图
 
-![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_sysytem.png)
+#### 系统图片选择
+
 ![screenshot_sysytem](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_sysytem.png)
 
+#### 知乎主题
 ![screenshot_zhihu_dracula](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_zhihu_dracula.png)
 ![screenshot_zhihu_normal](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_zhihu_normal.png)
 
-<div align="left"><img width="300" height="540" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat.png"/></div>
-<div align="left"><img width="300" height="540" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat_expand.png"/></div>
+#### 微信主题
+<div align="left"><img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat.png"/></div>
+<div><img width="200" height="360" src="https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_wechat_expand.png"/></div>
 
+#### 结果展示
 ![screenshot_result](https://github.com/qingmei2/RxImagePicker/blob/master/screenshot/screenshot_result.png)
 
 ## <h2 id="Usage">基本使用</h2>
@@ -48,16 +56,17 @@ RxImagePicker是一个用于Android的响应式图片选择器，它将您的图
 ### 1. 添加依赖在Module的build.gradle文件中：
 
 ```groovy
+//下面的版本号是笔者写本文时最新的版本号，使用时，请以github上最新的版本作为参考
 
-//提供了系统默认的图片选择器和拍照功能
-compile 'com.github.qingmei2:rximagepicker:0.1.0'
+//【1】最基础的架构，仅提供了系统默认的图片选择器和拍照功能
+compile 'com.github.qingmei2:rximagepicker:0.2.0'
 
-//提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
-compile 'com.github.qingmei2:rximagepicker_support:0.1.0'
+//【2】提供了自定义UI图片选择器的基本组件，自定义UI的需求需要添加该依赖
+compile 'com.github.qingmei2:rximagepicker_support:0.2.0'
 
 //如果需要额外的UI支持，请选择依赖对应的UI拓展库
-compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.1.0'     //知乎图片选择器
-compile 'com.github.qingmei2:rximagepicker_support_wechat:0.1.0'    //微信图片选择器(开发中...)
+compile 'com.github.qingmei2:rximagepicker_support_zhihu:0.2.0'     //【3】知乎图片选择器
+compile 'com.github.qingmei2:rximagepicker_support_wechat:0.2.0'    //【4】微信图片选择器
 
 ```
 ### 2. 接口配置
@@ -67,12 +76,12 @@ compile 'com.github.qingmei2:rximagepicker_support_wechat:0.1.0'    //微信图�
 ```java
 public interface MyImagePicker {
 
-    @Gallery
-    @AsFile
+    @Gallery    //打开相册选择图片
+    @AsFile     //返回值为File类型
     Observable<File> openGallery();
 
-    @Camera
-    @AsBitmap
+    @Camera    //打开相机拍照
+    @AsBitmap  //返回值为Bitmap类型
     Observable<Bitmap> openCamera();
 
 }
